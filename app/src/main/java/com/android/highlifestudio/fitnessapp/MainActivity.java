@@ -17,33 +17,42 @@ public class MainActivity extends AppCompatActivity {
 
     private static String TAG = "XFit";
     private GoogleApiClient mClient = null;
-
+    private Steps steps;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        connectGoogleApi();
+
+        if(mClient == null) { // TODO add checkPermission if needed by Data type + add requestPermission for android 6.0+
+            connectGoogleApi();
+        }
+        Subscription subscription = new Subscription(mClient);
+
+        steps = new Steps(mClient,this);
+        steps.getDailySteps();
+
     }
 
     void connectGoogleApi()
     {
         mClient = new GoogleApiClient.Builder(this)
                 .addApi(Fitness.HISTORY_API)
+                .addApi(Fitness.RECORDING_API)
                 .addScope(new Scope(Scopes.FITNESS_LOCATION_READ))
                 .addScope(new Scope(Scopes.FITNESS_ACTIVITY_READ))
                 .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
                     @Override
                     public void onConnected(@Nullable Bundle bundle) {
-                        Log.d(TAG,"Conntected to GoogleApi!");
+                        Log.d(TAG,"Connected to GoogleApi!");
                     }
 
                     @Override
                     public void onConnectionSuspended(int i) {
                         if (i == GoogleApiClient.ConnectionCallbacks.CAUSE_NETWORK_LOST) {
-                            Log.i(TAG, "Connection lost.  Cause: Network Lost.");
+                            Log.d(TAG, "Connection lost.  Cause: Network Lost.");
                         } else if (i
                                 == GoogleApiClient.ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED) {
-                            Log.i(TAG,
+                            Log.d(TAG,
                                     "Connection lost.  Reason: Service Disconnected");
                         }
                     }
