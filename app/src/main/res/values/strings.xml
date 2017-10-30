@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FitnessApp</string>
+    <string name="TrainingActivityButton">StartStopButton</string>
 </resources>
