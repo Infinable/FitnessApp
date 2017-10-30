@@ -19,10 +19,9 @@ public class Subscription {
 
    public Subscription(GoogleApiClient mClient){
        this.mClient = mClient;
-       subscribeToAll();
    }
 
-   private void subscribeToAll(){
+   public void subscribeToAll(){
        Fitness.RecordingApi.subscribe(mClient, DataType.TYPE_STEP_COUNT_DELTA)
                .setResultCallback(new ResultCallback<Status>() {
                    @Override
