@@ -16,6 +16,7 @@ import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.fitness.Fitness;
+import com.google.android.gms.fitness.request.DataReadRequest;
 
 public class MainActivity extends AppCompatActivity {
 
