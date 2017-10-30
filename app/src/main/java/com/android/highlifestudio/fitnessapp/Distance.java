@@ -47,10 +47,12 @@ public class Distance {
 
             PendingResult<DailyTotalResult> pendingResult = Fitness.HistoryApi.readDailyTotal(mClient,DataType.TYPE_DISTANCE_DELTA);
             DailyTotalResult dailyTotalResult = pendingResult.await();
-            DataSet dataSet = dailyTotalResult.getTotal();
-            if(!dataSet.isEmpty()){
+            if(dailyTotalResult.getStatus().isSuccess()){
+                DataSet dataSet = dailyTotalResult.getTotal();
+                if(!dataSet.isEmpty()){
 
-                totalDailydistance = dataSet.getDataPoints().get(0).getValue(Field.FIELD_DISTANCE).asFloat() / 2; //get data and convert from m to km
+                    totalDailydistance = dataSet.getDataPoints().get(0).getValue(Field.FIELD_DISTANCE).asFloat() / 2; //get data and convert from m to km
+                }
             }
             return null;
         }
