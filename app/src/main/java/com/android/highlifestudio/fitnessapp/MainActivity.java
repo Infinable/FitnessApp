@@ -15,18 +15,22 @@ import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.fitness.Fitness;
 import com.google.android.gms.fitness.request.DataReadRequest;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity {
 
     private static String TAG = "XFit";
     private GoogleApiClient mClient = null;
     private Steps steps;
     private TextView textViewTotalDailySteps;
+    private TextView textViewDistance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textViewTotalDailySteps = (TextView) findViewById(R.id.textViewDailySteps);
+        textViewDistance = (TextView) findViewById(R.id.textViewDistance);
         if(mClient == null) { // TODO add checkPermission if needed by Data type + add requestPermission for android 6.0+
             connectGoogleApi();
         }
@@ -36,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
         steps = new Steps(mClient,this,textViewTotalDailySteps);
         steps.getDailySteps();
 
-        Distance distance = new Distance(mClient,)
+        Distance distance = new Distance(mClient,textViewDistance);
+        distance.readTotalDailyDistance();
 
     }
 

@@ -36,7 +36,8 @@ public class Distance {
     }
 
     public void readTotalDailyDistance(){
-        PendingResult pendingResult = Fitness.HistoryApi.readDailyTotal(mClient, DataType.TYPE_DISTANCE_DELTA);
+        ReadTotalDailyDistance readTotalDailyDistance = new ReadTotalDailyDistance();
+        readTotalDailyDistance.execute();
     }
 
     private class ReadTotalDailyDistance extends AsyncTask<Void,Void,Void>
