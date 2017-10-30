@@ -28,11 +28,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewTotalDailySteps;
     private TextView textViewDistance;
     Button startTraining;
+    App state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        state=((App) getApplicationContext());
         startTraining= (Button) findViewById(R.id.startTraining);
         startTraining.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .build();
-
+        state.setClient(mClient);
     }
+
 }
