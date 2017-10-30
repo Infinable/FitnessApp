@@ -12,6 +12,8 @@ import com.google.android.gms.fitness.data.DataType;
 import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.fitness.result.DailyTotalResult;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by Pascal on 30.10.2017.
  */
@@ -24,8 +26,9 @@ public class Distance {
 
     private TextView textViewTotalDailyDistance;
 
-    public Distance(GoogleApiClient mClient){
+    public Distance(GoogleApiClient mClient, TextView textViewTotalDailyDistance){
         this.mClient = mClient;
+        this.textViewTotalDailyDistance = textViewTotalDailyDistance;
     }
 
     public void readDistanceWithGivenTime(){

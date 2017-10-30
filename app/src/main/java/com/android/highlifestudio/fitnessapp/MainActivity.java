@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -18,18 +19,23 @@ public class MainActivity extends AppCompatActivity {
     private static String TAG = "XFit";
     private GoogleApiClient mClient = null;
     private Steps steps;
+    private TextView textViewTotalDailySteps;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        textViewTotalDailySteps = (TextView) findViewById(R.id.textViewDailySteps);
         if(mClient == null) { // TODO add checkPermission if needed by Data type + add requestPermission for android 6.0+
             connectGoogleApi();
         }
         Subscription subscription = new Subscription(mClient);
+        subscription.subscribeToAll();
 
-        steps = new Steps(mClient,this);
+        steps = new Steps(mClient,this,textViewTotalDailySteps);
         steps.getDailySteps();
+
+        Distance distance = new Distance(mClient,)
 
     }
 
