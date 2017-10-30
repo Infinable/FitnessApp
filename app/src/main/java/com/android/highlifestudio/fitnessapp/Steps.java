@@ -5,6 +5,7 @@ import android.icu.text.LocaleDisplayNames;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -20,6 +21,8 @@ import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.fitness.result.DailyTotalResult;
 import com.google.android.gms.fitness.result.DataReadResult;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by Pascal on 28.10.2017.
  */
@@ -34,11 +37,13 @@ public class Steps {
 
     private Context context;
 
+    private TextView textViewSteps;
 
-    public Steps(GoogleApiClient mClient,Context context) {
+    public Steps(GoogleApiClient mClient, Context context, TextView textViewSteps) {
 
         this.mClient = mClient;
         this.context = context;
+        this.textViewSteps = textViewSteps;
     }
 
     public void getDailySteps() {
@@ -70,7 +75,7 @@ public class Steps {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            Toast.makeText(context,Long.toString(dailySteps),Toast.LENGTH_LONG).show();
+            textViewSteps.setText(Long.toString(dailySteps));
             super.onPostExecute(aVoid);
 
         }
